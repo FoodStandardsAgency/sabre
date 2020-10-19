@@ -2,6 +2,7 @@
 # sabre
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/xavier-gilbert/sabre.svg?branch=master)](https://travis-ci.com/xavier-gilbert/sabre)
 <!-- badges: end -->
 
 The goal of sabre is to ...
