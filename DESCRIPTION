@@ -1,0 +1,29 @@
+Package: sabre
+Type: Package
+Title: A set of functions to clean address and business records in flat files.
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Spruce up Addresse and Business REcords
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Depends:
+    R (>= 3.2)
+Imports:
+    stringi (>= 1.1.0),
+    stringr (>= 1.4.0),
+    tidyr (>= 1.1.2),
+    dplyr (>= 1.0.2)
+Suggests:
+    covr,
+    htmltools,
+    htmlwidgets,
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder:
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
