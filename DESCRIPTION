@@ -1,12 +1,15 @@
 Package: sabre
 Type: Package
-Title: A set of functions to clean address and business records in flat files
+Title: Spruce up Addresse and Business REcords
 Version: 0.1.0
 Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: Spruce up Addresse and Business REcords
-    Use four spaces when indenting paragraphs within the Description
-License: What license is it under?
+Maintainer: Xavier Gilbert <xavier.gilbert@food.gov.uk>
+Description: A set of functions to clean address and business records
+    in flat files. The interface tries to consistently use the 'stringi',
+    and 'plyr' packages, as well functional programming. The package
+    aims at producing consistent outputs for further text processing
+    such as fuzzy matching, and tokenization.
+License: GPL (>=3)
 Depends:
     R (>= 3.2)
 Imports:
