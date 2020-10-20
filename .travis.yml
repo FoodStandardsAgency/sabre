@@ -3,6 +3,8 @@
 branches:
     only:
         - master
+        - main
+        - dev
 
 language: R
 cache: packages

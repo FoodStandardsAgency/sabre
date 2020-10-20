@@ -138,16 +138,16 @@ strip_buildings_numbers_in_string <- function(string, locale = "GBR") {
   switch(locale,
          "GBR" = {
            numbers_pattern <- paste0(
-             "(?![a-zA-Z]{1,2}\\d[a-zA-Z\\d]?)",
-             "(?!\\d[a-zA-Z]{2})\\b",
-             "([0-9]+[a-zA-Z]?)\\b",
-             "|\\b\\d+(?=[a-zA-Z]{3,}\\b)"
+             "(?![a-zA-Z]{1,2}\\d[a-zA-Z\\d]?)", # area + district (outward)
+             "(?!\\d[a-zA-Z]{2})\\b",            # sector + unit (inward)
+             "([0-9]+[a-zA-Z]?)\\b",             # numeric possibly with letter
+             "|\\b\\d+(?=[a-zA-Z]{3,}\\b)"       #
            )
          })
 
   string %>%
     str_replace_all(., numbers_pattern, "") %>%
-    str_squish() # if string start or end with number, creates trailing ws
+    str_squish() # if string start or end with number, it creates trailing ws
 }
 
 
