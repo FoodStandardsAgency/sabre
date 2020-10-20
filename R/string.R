@@ -63,14 +63,14 @@ replace_in_string <- function(string, from, to) {
 #' @export
 #'
 #' @examples
-#' columns <- c("address", "business_name")
-#' standardize_strings(df, columns, replacements='ghbusiness')
+#' columns <- c("address", "trading_name")
+#' standardize_strings(businesses, columns, replacements='ghbusiness')
 #'
-#' columns <- c("address", "business_name")
+#' columns <- c("address", "trading_name")
 #' from <- c(',', '\\(.*\\)', '&')
 #' to <- c('', '', ' and ')
 #' standardize_strings(
-#'   df,
+#'   businesses,
 #'   columns,
 #'   replacements=list(from, to)
 #'   )

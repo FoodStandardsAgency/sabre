@@ -1,24 +1,17 @@
-#' Sample character vectors for practicing string manipulations
+#' Sample tibble vectors for practicing data cleaning and running tests
 #'
-#' `fruit` and `word` come from the `rcorpora` package
-#' written by Gabor Csardi; the data was collected by Darius Kazemi
-#' and made available at \url{https://github.com/dariusk/corpora}.
-#' `sentences` is a collection of "Harvard sentences" used for
-#' standardised testing of voice.
+#' `businesses` is a collection of business records with 4 features
+#'  "index":
+#'  "address":
+#'  "postcode":
+#'  "trading_name":
 #'
-#' @format Character vectors.
+#' @format tibble
 #' @name sabre-data
 #' @examples
-#' length(sentences)
-#' sentences[1:5]
-#'
-#' length(fruit)
-#' fruit[1:5]
-#'
-#' length(words)
-#' words[1:5]
+#' find_buildings_numbers(businesses)
 NULL
 
-#' @rdname sabre-data
+#' @rdname stringr-data
 #' @format NULL
 "businesses"

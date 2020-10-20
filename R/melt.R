@@ -20,23 +20,25 @@
 #'
 #' @examples
 #' melt_rows(
-#'   businesses_,
+#'   businesses[4:8, 3:4],
 #'   "trading_name",
-#'   dividers = c("\\|", " trading as ", "\\/")
+#'   dividers = c("\\|", " trading as ", "t/a", "\\/")
 #'   )
 #'
 #' @importFrom stringr str_c str_squish
 #' @importFrom tidyr separate_rows
-#' @importFrom dplyr distinct mutate_at
+#' @importFrom dplyr distinct mutate_at filter
 #' @importFrom purrr when
+#' @importFrom rlang sym
 melt_rows <- function(df, column, dividers = c("\\|"), trim_ws = TRUE){
   dividers_ <- str_c(dividers, collapse = "|")
+  quo_column <- sym(column)
 
   df %>%
     separate_rows(., column, sep = dividers_) %>%
     when(trim_ws ~ mutate_at(., column, str_trim),
          ~.
     ) %>%
-    filter((!!sym(column)) != "") %>%
+    filter((!! quo_column) != "") %>%
     distinct()
 }

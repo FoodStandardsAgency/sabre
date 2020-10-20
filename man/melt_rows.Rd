@@ -32,9 +32,9 @@ having delimited values will create new rows.
 }
 \examples{
 melt_rows(
-  businesses_,
+  businesses[4:8, 3:4],
   "trading_name",
-  dividers = c("\\\\|", " trading as ", "\\\\/")
+  dividers = c("\\\\|", " trading as ", "t/a", "\\\\/")
   )
 
 }

@@ -1,6 +1,6 @@
 context("melt")
 
-# melt_rows
+melt_rows
 test_that("business names separators", {
   businesses_subset_melt <-
     structure(

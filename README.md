@@ -9,6 +9,17 @@ The goal of sabre is to ...
 
 ## Installation
 
+### Github install
+
+```r
+library(devtools)
+install_github("xavier-gilbert/sabre")
+```
+
+### CRAN install
+
+> Not yet available.
+
 You can install the released version of sabre from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -17,10 +28,36 @@ install.packages("sabre")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Replace special characters in strings and melt columns on separators.
+
+|postcode |trading_name                                |
+|:--------|:-------------------------------------------|
+|B42 1AB  |Cosy café @ The horse and hound             |
+|B25      |Food Zone t/a ReFood                        |
+|G12 0ZS  |Hocus Pocus t/aVan Leer                     |
+|SE16 1BE |Media Luna Bakery Ltd trading as Media Luna |
+|EC2M 1AA |t/a Pharmacy Doherty                        |
 
 ``` r
 library(sabre)
-## basic example code
+
+melt_rows(
+  businesses[4:8, 3:4],
+  "trading_name",
+  dividers = c("\\|", " trading as ", "t/a", "\\/")
+  ) %>%
+  dplyr::mutate_at(., "trading_name", ~replace_in_string(., "@", "")) %>%
+  dplyr::mutate_at(., "trading_name", strip_business_legal_entity_type) %>%
+  dplyr::mutate_at(., "trading_name", stringr::str_squish)
 ```
 
+|postcode |trading_name                  |
+|:--------|:-----------------------------|
+|B42 1AB  |Cosy café The horse and hound |
+|B25      |Food Zone                     |
+|B25      |ReFood                        |
+|G12 0ZS  |Hocus Pocus                   |
+|G12 0ZS  |Van Leer                      |
+|SE16 1BE |Media Luna Bakery             |
+|SE16 1BE |Media Luna                    |
+|EC2M 1AA |Pharmacy Doherty              |
