@@ -23,7 +23,6 @@
 #'
 #' @importFrom stringr str_extract_all
 find_postcodes_in_string <- function(string, locale = "GBR") {
-  # @TODO
   switch(locale,
          "GBR" = {
            postcode_pattern <- paste0(
@@ -183,7 +182,7 @@ strip_buildings_numbers <- function(X, ...) {
 #' format_postcode('eC2A0Rn')
 #'
 #' @importFrom stringr str_squish
-format_postcode  <- function(postcode, locale = "GBR") {
+format_postcode <- function(postcode, locale = "GBR") {
   switch(locale,
          "GBR" = {
            postcode_pattern <- "([A-Z]{1,2}\\d[A-Z\\d]?)(\\d[A-Z]{2})"

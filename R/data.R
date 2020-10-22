@@ -12,6 +12,6 @@
 #' find_buildings_numbers(businesses)
 NULL
 
-#' @rdname stringr-data
+#' @rdname sabre-data
 #' @format NULL
 "businesses"

@@ -13,10 +13,12 @@
 #' @importFrom stringr str_replace str_trim
 #' @importFrom purrr when
 strip_business_legal_entity_type <- function(string, trim_ws = TRUE) {
-  pattern <- "(?:^|\\b)(?:Corporation|Incorporated|Limited|Company|P\\.C|[Ll][Tt][Dd]|[Pp][Ll]{1,2}[Cc])\\.?"
+  pattern <- "(?:^|\\b)(?:Incorporated|[Ll]imited|P\\.C|[Ll][Tt][Dd]|[Pp][Ll]{1,2}[Cc])\\.?"
   string %>%
     str_replace(., pattern, "") %>%
     when(trim_ws ~ str_trim(.),
          ~.
     )
 }
+
+strip_business_legal_entity_type("The limited Arms")

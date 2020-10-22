@@ -2,7 +2,8 @@
 # sabre
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/xavier-gilbert/sabre.svg?branch=master)](https://travis-ci.com/xavier-gilbert/sabre)
+[![Travis build status](https://travis-ci.com/xavier-gilbert/sabre.svg?branch=main)](https://travis-ci.com/xavier-gilbert/sabre)
+[![Codecov test coverage](https://codecov.io/gh/xavier-gilbert/sabre/branch/main/graph/badge.svg)](https://codecov.io/gh/xavier-gilbert/sabre?branch=master)
 <!-- badges: end -->
 
 The goal of sabre is to ...

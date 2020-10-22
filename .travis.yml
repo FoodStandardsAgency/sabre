@@ -2,11 +2,17 @@
 
 branches:
     only:
-        - master
         - main
+        - master
         - dev
 
 language: R
 cache: packages
 
+r_packages:
+    - covr
+
 warnings_are_errors: false
+
+after_success:
+    - Rscript -e 'covr::codecov()'
