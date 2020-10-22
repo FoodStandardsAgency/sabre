@@ -5,24 +5,19 @@
 \title{Find the numerical parts (building|house|unit) in a list, vector or data
 frame of addresses.}
 \usage{
-find_buildings_numbers(X, ...)
+find_buildings_numbers(X)
 }
 \arguments{
-\item{X}{list, vector or data frame, appropriate to a call to lapply.}
-
-\item{...}{optional arguments to \code{find_buildings_numbers_in_string()}.}
+\item{X}{list, vector or data frame, appropriate to a call to sapply.}
 }
 \value{
-list
+A named vector of characters.
 }
 \description{
-Returns an empty string where no match is found.
-Vectorized version of \code{find_buildings_numbers_in_string()}.Doest not match
-postcodes or parts of a postcode.
+Find the numerical parts (building|house|unit) in a list, vector or data
+frame of addresses.
 }
 \examples{
-find_buildings_numbers(businesses)
-}
-\seealso{
-\code{\link[=find_buildings_numbers_in_string]{find_buildings_numbers_in_string()}}
+find_buildings_numbers(businesses[['address']])
+
 }
