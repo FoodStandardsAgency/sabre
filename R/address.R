@@ -197,3 +197,68 @@ format_postcode <- function(postcode, locale = "GBR") {
     postcode
   }
 }
+
+
+
+#' Is the string the district part of a postcode.
+#'
+#' @param postcode A character string.
+#' @param ignore_case A boolean.
+#'
+#' @return A boolean.
+#' @export
+#'
+#' @examples
+#' is_district("EC2A")
+#' is_district("se16", ignore_case = TRUE)
+is_district <- function(postcode, ignore_case = FALSE) {
+  grepl(
+    paste0("^[A-PR-UWYZ]([0-9]{1,2}",             # district (E2)
+           "|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)", # district (EC2A)
+           "|[0-9][A-HJKPS-UW])$"),               # district (SE16)
+    postcode,
+    ignore.case = ignore_case
+  )
+}
+
+
+#' Is the string a full postcode.
+#'
+#' @param postcode A character string.
+#' @param ignore_case A boolean.
+#'
+#' @return A boolean.
+#' @export
+#'
+#' @examples
+#' is_postcode_complete("EC2A 3JX")
+#' is_postcode_complete("ec2a", ignore_case = TRUE)
+is_postcode_complete <- function(postcode, ignore_case = FALSE) {
+  grepl(
+    "(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})",
+    postcode,
+    ignore.case = ignore_case
+  )
+}
+
+
+#' Is the string a partial postcode.
+#'
+#' A postcode is partial if:
+#' 1. it is not complete
+#' 2. it is the area + district (outward) part of the postcode
+#' 3. OR it is the sector + unit (inward) part of the postcode
+#'
+#' @param postcode A character string.
+#' @param ignore_case A boolean.
+#'
+#' @return A boolean.
+#' @export
+#'
+#' @examples
+#' is_postcode_partial("EC2A 3JX")
+#' is_postcode_partial("ec2a", ignore_case = TRUE)
+is_postcode_partial <- function(postcode, ignore_case = FALSE) {
+  !is_postcode_complete(postcode, ignore_case = ignore_case) &
+    is_district(postcode, ignore_case = ignore_case)
+}

@@ -134,7 +134,23 @@ test_that("format postcodes", {
   expect_equal(format_postcode("N17RN  "), "N1 7RN")
 })
 
+test_that("is district", {
+  expect_equal(is_district("EC2A"), TRUE)
+  expect_equal(is_district("EC2A 3JX"), FALSE)
+  expect_equal(is_district("se16", ignore_case = TRUE), TRUE)
+  expect_equal(is_district("se16 7dx", ignore_case = TRUE), FALSE)
+})
 
+test_that("is postcode complete", {
+  expect_equal(is_postcode_complete("EC2A"), FALSE)
+  expect_equal(is_postcode_complete("EC2A 3JX"), TRUE)
+  expect_equal(is_postcode_complete("se16", ignore_case = TRUE), FALSE)
+  expect_equal(is_postcode_complete("se16 7dx", ignore_case = TRUE), TRUE)
+})
 
-
-
+test_that("is postcode partial", {
+  expect_equal(is_postcode_partial("EC2A"), TRUE)
+  expect_equal(is_postcode_partial("EC2A 3JX"), FALSE)
+  expect_equal(is_postcode_partial("se16", ignore_case = TRUE), TRUE)
+  expect_equal(is_postcode_partial("se16 7dx", ignore_case = TRUE), FALSE)
+})
