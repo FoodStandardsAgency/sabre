@@ -14,8 +14,10 @@ on:
   pull_request:
     branches: [ main ]
 
+name: R-CMD-check
+
 jobs:
-  build:
+  R-CMD-check:
     runs-on: macOS-latest
     strategy:
       matrix:
