@@ -5,6 +5,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Travis build status](https://travis-ci.org/xavier-gilbert/sabre.svg?branch=main)](https://travis-ci.com/xavier-gilbert/sabre)
 [![Codecov test coverage](https://codecov.io/gh/xavier-gilbert/sabre/branch/main/graph/badge.svg)](https://codecov.io/gh/xavier-gilbert/sabre?branch=master)
+[![R build status](https://github.com/xavier-gilbert/sabre/workflows/R-CMD-check/badge.svg)](https://github.com/xavier-gilbert/sabre/actions)
 <!-- badges: end -->
 
 The goal of sabre is to ...

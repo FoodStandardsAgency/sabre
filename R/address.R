@@ -62,23 +62,26 @@ find_postcodes <- function(X, ...) {
 #' Returns an empty string where no match is found.
 #' The match is performed with a look ahead to match address number patterns
 #'   that are not a postcode.
-#' For large flat files, use `find_buildings_numbers()`.
 #'
 #' @param string Input vector. Either a character vector, or something
 #'   coercible to one (e.g. a data frame).
 #' @param locale A string, the country code in format ISO 3. Default is "GBR".
-#' @param sep A character string to separate the terms in the returned string.
+#' @param sep A character string separator used to collapse the matches.
+#' @param unlist A boolean.
 #'
-#' @return A character vector of the contatenated values (shape: (1,1)).
-#' @seealso [find_buildings_numbers()]
+#' @return A character vector of the contatenated values, with the same length
+#'   as the input character vector.
 #' @export
 #'
 #' @examples
 #' string <- "The quick brown fox's family lives at 22A-22B Bridge Road, N17 0RN."
-#' find_buildings_numbers_in_string(string)
+#' find_buildings_numbers(string)
 #'
-#' @importFrom stringr str_c
-find_buildings_numbers_in_string <- function(string, locale = "GBR", sep = "|") {
+#' find_buildings_numbers(businesses, unlist = FALSE)
+#'
+#' @importFrom stringr str_c str_extract_all
+#' @importFrom purrr when
+find_buildings_numbers <- function(string, locale = "GBR", sep = "|", unlist = TRUE) {
   switch(locale,
          "GBR" = {
            numbers_pattern <- paste0(
@@ -91,57 +94,10 @@ find_buildings_numbers_in_string <- function(string, locale = "GBR", sep = "|") 
 
   string %>%
     str_extract_all(., numbers_pattern) %>%
-    unlist() %>%
-    str_c(., collapse = sep)
-}
-
-
-#' Find the numerical parts (building|house|unit) in a list, vector or data
-#' frame of addresses.
-#'
-#' Returns an empty string where no match is found.
-#' Vectorized version of `find_buildings_numbers_in_string()`.Doest not match
-#' postcodes or parts of a postcode.
-#'
-#' @param X list, vector or data frame, appropriate to a call to lapply.
-#' @param ... optional arguments to `find_buildings_numbers_in_string()`.
-#'
-#' @return list
-#' @seealso [find_buildings_numbers_in_string()]
-#' @export
-#'
-#' @examples
-#' find_buildings_numbers(businesses)
-find_buildings_numbers_ <- function(X, ...) {
-  # lapply(X, find_buildings_numbers_in_string)
-  sapply(X, find_buildings_numbers_in_string)
-}
-
-
-#' Find the numerical parts (building|house|unit) in a list, vector or data
-#' frame of addresses.
-#'
-#' @param X list, vector or data frame, appropriate to a call to sapply.
-#'
-#' @return A named vector of characters.
-#' @export
-#'
-#' @examples
-#' find_buildings_numbers(businesses[['address']])
-#'
-#' @importFrom stringr str_c
-#' @importFrom stringi stri_extract_all_regex
-find_buildings_numbers <- function(X) {
-  find_buildings_numbers_ <- function(string, locale = "GBR", sep = "|") {
-    numbers_pattern <- "(?![a-zA-Z]{1,2}\\d[a-zA-Z\\d]?)(?!\\d[a-zA-Z]{2})\\b([0-9]+[a-zA-Z]?)\\b|\\b\\d+(?=[a-zA-Z]{3,}\\b)"
-    str_c(
-      unlist(
-        stri_extract_all_regex(string, numbers_pattern)
-      ),
-      collapse = sep
+    lapply(., str_c, collapse = sep) %>%
+    when(unlist ~ unlist(.),
+         ~.
     )
-  }
-  sapply(X, find_buildings_numbers_)
 }
 
 

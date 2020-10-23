@@ -2,22 +2,33 @@
 % Please edit documentation in R/address.R
 \name{find_buildings_numbers}
 \alias{find_buildings_numbers}
-\title{Find the numerical parts (building|house|unit) in a list, vector or data
-frame of addresses.}
+\title{Find the numerical parts of an address (building|house|unit).}
 \usage{
-find_buildings_numbers(X)
+find_buildings_numbers(string, locale = "GBR", sep = "|", unlist = TRUE)
 }
 \arguments{
-\item{X}{list, vector or data frame, appropriate to a call to sapply.}
+\item{string}{Input vector. Either a character vector, or something
+coercible to one (e.g. a data frame).}
+
+\item{locale}{A string, the country code in format ISO 3. Default is "GBR".}
+
+\item{sep}{A character string separator used to collapse the matches.}
+
+\item{unlist}{A boolean.}
 }
 \value{
-A named vector of characters.
+A character vector of the contatenated values, with the same length
+as the input character vector.
 }
 \description{
-Find the numerical parts (building|house|unit) in a list, vector or data
-frame of addresses.
+Returns an empty string where no match is found.
+The match is performed with a look ahead to match address number patterns
+that are not a postcode.
 }
 \examples{
-find_buildings_numbers(businesses[['address']])
+string <- "The quick brown fox's family lives at 22A-22B Bridge Road, N17 0RN."
+find_buildings_numbers(string)
+
+find_buildings_numbers(businesses, unlist = FALSE)
 
 }

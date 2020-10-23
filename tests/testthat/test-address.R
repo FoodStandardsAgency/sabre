@@ -99,15 +99,17 @@ test_that("find buildings numbers", {
       trading_name = "2"
     )
 
-  expect_equal(find_buildings_numbers_in_string(fox_string),
+  expect_equal(find_buildings_numbers(fox_string),
                "6|22A|23b|7|19C|20A|20B")
-  expect_equal(find_buildings_numbers_in_string("123A-124B High Street"),
+  expect_equal(find_buildings_numbers("123A-124B High Street"),
                "123A|124B")
-  expect_equal(find_buildings_numbers_in_string("52High Street"), "52")
-  expect_equal(find_buildings_numbers_in_string("N1 2RN"), "")
+  expect_equal(find_buildings_numbers("52High Street"), "52")
+  expect_equal(find_buildings_numbers("N1 2RN"), "")
 
-  # expect_equal(find_buildings_numbers(businesses),
-  #              buildings_numbers_in_businesses_df)
+  expect_equal(find_buildings_numbers(businesses),
+               c("1|8", "202|205|1|1|34|2|23|39|66|54", "", "2"))
+    expect_equal(find_buildings_numbers(businesses, unlist = FALSE),
+                 list("1|8", "202|205|1|1|34|2|23|39|66|54", "", "2"))
 })
 
 # strip_buildings_numbers_in_string
