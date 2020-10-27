@@ -118,15 +118,15 @@ test_that("strip buildings numbers", {
   string <- "The quick brown fox's postcode is N17 0RN and his house number is 6. The family den extends under number 22A-23b Fox street, which marks the West end of E3. If you cannot reach him, try his relatives at 7Caledonian Road, or 19C, 20A&20B EC30RN but do not forget the separating white space after the district's code E3."
   string_no_building_numbers <- "The quick brown fox's postcode is N17 0RN and his house number is . The family den extends under number - Fox street, which marks the West end of E3. If you cannot reach him, try his relatives at Caledonian Road, or , & EC30RN but do not forget the separating white space after the district's code E3."
   expect_equal(
-    strip_buildings_numbers_in_string(string),
+    strip_buildings_numbers(string),
     string_no_building_numbers
     )
   expect_equal(
-    strip_buildings_numbers_in_string("42High Street"),
+    strip_buildings_numbers("42High Street"),
     "High Street"
     )
   expect_equal(
-    strip_buildings_numbers_in_string("7Caledonian Road"),
+    strip_buildings_numbers("7Caledonian Road"),
     "Caledonian Road"
     )
 })

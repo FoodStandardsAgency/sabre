@@ -4,7 +4,7 @@
 \alias{find_buildings_numbers}
 \title{Find the numerical parts of an address (building|house|unit).}
 \usage{
-find_buildings_numbers(string, locale = "GBR", sep = "|", unlist = TRUE)
+find_buildings_numbers(string, locale = "GBR", collapse = "|", unlist = TRUE)
 }
 \arguments{
 \item{string}{Input vector. Either a character vector, or something
@@ -12,7 +12,7 @@ coercible to one (e.g. a data frame).}
 
 \item{locale}{A string, the country code in format ISO 3. Default is "GBR".}
 
-\item{sep}{A character string separator used to collapse the matches.}
+\item{collapse}{A character string separator used to collapse the matches.}
 
 \item{unlist}{A boolean.}
 }
