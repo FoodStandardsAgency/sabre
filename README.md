@@ -6,7 +6,7 @@
 [![Travis build status](https://travis-ci.org/xavier-gilbert/sabre.svg?branch=main)](https://travis-ci.org/xavier-gilbert/sabre)
 [![Codecov test coverage](https://codecov.io/gh/xavier-gilbert/sabre/branch/main/graph/badge.svg)](https://codecov.io/gh/xavier-gilbert/sabre?branch=master)
 [![R build status](https://github.com/xavier-gilbert/sabre/workflows/R-CMD-check/badge.svg)](https://github.com/xavier-gilbert/sabre/actions)
-[![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
+[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/emersion/stability-badges#unstable)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 

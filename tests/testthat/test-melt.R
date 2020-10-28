@@ -14,6 +14,7 @@ test_that("business names separators", {
           "G12 0ZS",
           "SE16 1BE",
           "SE16 1BE",
+          "EC2M 1AA",
           "EC2M 1AA"
         ),
         trading_name = c(
@@ -25,10 +26,11 @@ test_that("business names separators", {
           "Van Leer",
           "Media Luna Bakery Ltd",
           "Media Luna",
+          "",
           "Pharmacy Doherty"
         )
       ),
-      row.names = c(NA,-9L),
+      row.names = c(NA,-10L),
       class = c("tbl_df", "tbl", "data.frame")
     )
 
