@@ -20,46 +20,47 @@
 #' @importFrom dplyr enquo mutate across select
 #' @importFrom stringr str_replace str_squish
 #' @importFrom rlang :=
-col_diff <- function(df, left, right, how = 'exact') {
+col_diff <- function(df, left, right, how = "exact") {
   left <- enquo(left)
   right <- enquo(right)
 
-  if (all(how == 'exact')) {
+  if (all(how == "exact")) {
     df %>%
+      # make special characters safe
       mutate(right_temp := replace_in_string(
         !!right,
-        c("\\(", "\\)", "\\+", "\\*"),
-        c("\\\\(", "\\\\)", "\\\\+", "\\\\*")
+        c("\\(", "\\)", "\\+", "\\*", "\\[", "\\]", "\\{", "\\}", "\\?"),
+        c("\\\\(", "\\\\)", "\\\\+", "\\\\*", "\\\\[", "\\\\]", "\\\\{", "\\\\}", "\\\\?")
       )) %>%
       mutate(!!left := str_replace(!!left, right_temp, "")) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(-c(right_temp))
-  } else if (all(how == 'lowercase')) {
+  } else if (all(how == "lowercase")) {
     df %>%
       mutate(right_temp := replace_in_string(
         !!right,
-        c("\\(", "\\)", "\\+", "\\*"),
-        c("\\\\(", "\\\\)", "\\\\+", "\\\\*")
+        c("\\(", "\\)", "\\+", "\\*", "\\[", "\\]", "\\{", "\\}", "\\?"),
+        c("\\\\(", "\\\\)", "\\\\+", "\\\\*", "\\\\[", "\\\\]", "\\\\{", "\\\\}", "\\\\?")
       )) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
       mutate(!!left := str_replace(!!left, !!right, "")) %>%
       mutate(!!left := str_squish(!!left))
-  } else if (all(how == 'squish')) {
+  } else if (all(how == "squish")) {
     df %>%
       mutate(right_temp := replace_in_string(
         !!right,
-        c("\\(", "\\)", "\\+", "\\*"),
-        c("\\\\(", "\\\\)", "\\\\+", "\\\\*")
+        c("\\(", "\\)", "\\+", "\\*", "\\[", "\\]", "\\{", "\\}", "\\?"),
+        c("\\\\(", "\\\\)", "\\\\+", "\\\\*", "\\\\[", "\\\\]", "\\\\{", "\\\\}", "\\\\?")
       )) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%
       mutate(!!left := str_replace(!!left, !!right, "")) %>%
       mutate(!!left := str_squish(!!left))
-  } else if (all(how == c('lowercase', 'squish'))) {
+  } else if (all(how == c("lowercase", "squish"))) {
     df %>%
       mutate(right_temp := replace_in_string(
         !!right,
-        c("\\(", "\\)", "\\+", "\\*"),
-        c("\\\\(", "\\\\)", "\\\\+", "\\\\*")
+        c("\\(", "\\)", "\\+", "\\*", "\\[", "\\]", "\\{", "\\}", "\\?"),
+        c("\\\\(", "\\\\)", "\\\\+", "\\\\*", "\\\\[", "\\\\]", "\\\\{", "\\\\}", "\\\\?")
       )) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%

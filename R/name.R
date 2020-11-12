@@ -48,7 +48,7 @@ strip_business_legal_entity_type <- function(string, trim_ws = FALSE, squish_ws 
 #' @importFrom stringr str_replace str_trim
 #' @importFrom purrr when
 strip_honorific_title <- function(string, trim_ws = FALSE, squish_ws = TRUE) {
-  pattern <- "tbc"
+  pattern <- "(([MmDdSs][RSrs]{1,2}|[Mm]iss)\\.?)(\\sand\\s|\\s&\\s)?(([MmDdSs][RSrs]{1,2}|[Mm]iss)\\.?)?"
   string %>%
     str_replace_all(., pattern, "") %>%
     when(trim_ws ~ str_trim(.),
