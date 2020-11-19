@@ -49,9 +49,9 @@ strip_business_legal_entity_type <- function(string, trim_ws = FALSE, squish_ws 
 #' @importFrom purrr when
 strip_honorific_title <- function(string, trim_ws = FALSE, squish_ws = TRUE) {
   pattern <- paste0(
-               "((\\b[MmSs][RSrs]{1,2}|[Mm]iss|[Dd][Rr][Ss]?|[Pp][Rr][Oo][Ff](essor)?)(\\.|\\b))",
+               "(\\b([MmSs][RSrs]{1,2}|[Mm]iss|[Dd][Rr][Ss]?|[Pp][Rr][Oo][Ff](essor)?)(\\.|\\b))",
                "(\\sand\\s|\\s&\\s)?",
-               "((\\b[MmSs][RSrs]{1,2}|[Mm]iss|[Dd][Rr][Ss]?|[Pp][Rr][Oo][Ff](essor)?)(\\.|\\b))?"
+               "(\\b([MmSs][RSrs]{1,2}|[Mm]iss|[Dd][Rr][Ss]?|[Pp][Rr][Oo][Ff](essor)?)(\\.|\\b))?"
              )
 
   string %>%
