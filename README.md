@@ -10,7 +10,8 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-The goal of sabre is to ...
+Sabre is a toolbox to ease and standardize the cleaning of business and address records.  
+
 
 ## Installation
 
@@ -18,18 +19,16 @@ The goal of sabre is to ...
 
 ```r
 library(devtools)
-install_github("xavier-gilbert/sabre")
+install_github("FoodStandardsAgency/sabre")
 ```
 
 ### CRAN install
 
-> Not yet available.
-
-You can install the released version of sabre from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("sabre")
-```
+> **Not available just yet.**
+> You can install the released version of sabre from [CRAN](https://CRAN.R-project.org) with:
+> ``` r
+> install.packages("sabre")
+> ```
 
 ## Example
 
