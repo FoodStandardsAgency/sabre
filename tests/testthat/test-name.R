@@ -51,7 +51,9 @@ test_that("strip honorific title from name", {
     "Professor Holmes",
     "Tharaldr Coffee",
     "Omr",
-    "Dismiss"
+    "Dismiss",
+    "ss Hussain",
+    "Robert Downey sr"
   )
   titles_stripped <-
     c(
@@ -78,13 +80,15 @@ test_that("strip honorific title from name", {
       "Jekyll and Hyde",
       "DS Wrap",
       "Denis",
-      "Associates",
+      "Drs Associates",
       "Holmes",
       "Holmes",
       "Holmes",
       "Tharaldr Coffee",
       "Omr",
-      "Dismiss"
+      "Dismiss",
+      "ss Hussain",
+      "Robert Downey sr"
     )
   expect_equal(
     strip_honorific_title(titles),
