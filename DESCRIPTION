@@ -11,7 +11,7 @@ Description: A set of functions to clean address and business records
     such as fuzzy matching, and tokenization.
 License: GPL (>=3)
 Depends:
-    R (>= 3.2)
+    R (>= 3.5)
 Imports:
     stringi (>= 1.1.0),
     stringr (>= 1.4.0),

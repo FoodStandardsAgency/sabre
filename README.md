@@ -3,8 +3,8 @@
 
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Travis build status](https://travis-ci.org/xavier-gilbert/sabre.svg?branch=main)](https://travis-ci.org/xavier-gilbert/sabre)
-[![Codecov test coverage](https://codecov.io/gh/xavier-gilbert/sabre/branch/main/graph/badge.svg)](https://codecov.io/gh/xavier-gilbert/sabre?branch=master)
+[![Travis build status](https://travis-ci.org/FoodStandardsAgency/sabre.svg?branch=main)](https://travis-ci.org/github/FoodStandardsAgency/sabre)
+[![Codecov test coverage](https://codecov.io/gh/FoodStandardsAgency/sabre/branch/main/graph/badge.svg)](https://codecov.io/gh/FoodStandardsAgency/sabre?branch=master)
 [![R build status](https://github.com/xavier-gilbert/sabre/workflows/R-CMD-check/badge.svg)](https://github.com/xavier-gilbert/sabre/actions)
 [![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/emersion/stability-badges#unstable)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
