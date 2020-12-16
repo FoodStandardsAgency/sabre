@@ -17,6 +17,12 @@ A boolean.
 \description{
 Is the string a full postcode.
 }
+\section{TODO}{
+
+Handle case is_postcode_complete("ng22 9qc", ignore_case = TRUE)
+This postcode is not recognized by the regex but is valid(?)
+}
+
 \examples{
 is_postcode_complete("EC2A 3JX")
 is_postcode_complete("ec2a", ignore_case = TRUE)

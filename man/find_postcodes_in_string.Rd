@@ -25,6 +25,7 @@ For large flat files, use \code{find_postcodes()}.
 Handle extra white spaces: try trimming ws inside postcode if not match
 Handle special cases with lower casing without interferring with other strings
 such as Ec2M 1aA
+Add ignore_case parameter
 }
 
 \examples{

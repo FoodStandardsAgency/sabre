@@ -16,6 +16,8 @@
 #' Handle extra white spaces: try trimming ws inside postcode if not match
 #' Handle special cases with lower casing without interferring with other strings
 #'   such as Ec2M 1aA
+#' Handle case: currently only findingpostcodes that are in caps (to deal with possible
+#' typos, see test)
 #'
 #' @examples
 #' string <- "The quick brown fox lives at 6 Bridge Road, N17 0RN."
@@ -24,13 +26,14 @@
 #' @importFrom stringr str_extract_all
 find_postcodes_in_string <- function(string, locale = "GBR") {
   switch(locale,
-         "GBR" = {
-           postcode_pattern <- paste0(
-             "(\\b[A-Z]{1,2}\\d[A-Z\\d]?|",    # district preceded by word
-             "\\w{0}[A-Z]{1,2}\\d[A-Z\\d]?) ", # district preceded by word with no ws
-             "?\\d[A-Z]{2}"                    # sector + unit
-           )
-         })
+    "GBR" = {
+      postcode_pattern <- paste0(
+        "(\\b[A-Z]{1,2}\\d[A-Z\\d]?|",    # district preceded by word
+        "\\w{0}[A-Z]{1,2}\\d[A-Z\\d]?) ", # district preceded by word with no ws
+        "?\\d[A-Z]{2}"                    # sector + unit
+      )
+    }
+  )
 
   string %>%
     str_extract_all(., postcode_pattern) %>%
@@ -200,15 +203,16 @@ strip_buildings_numbers <- function(.data, locale = "GBR", squish_ws = TRUE) {
 #' @importFrom stringr str_squish
 format_postcode <- function(postcode, locale = "GBR") {
   switch(locale,
-         "GBR" = {
-           postcode_pattern <- "([A-Z]{1,2}\\d[A-Z\\d]?)(\\d[A-Z]{2})"
-         })
+    "GBR" = {
+      postcode_pattern <- "([A-Z]{1,2}\\d[A-Z\\d]?)(\\d[A-Z]{2})"
+    }
+  )
 
   postcode <- str_squish(postcode) %>%
     toupper()
 
   if (!grepl(" ", postcode, fixed = TRUE)) {
-    gsub(postcode_pattern, '\\1 \\2', postcode, perl = TRUE)
+    gsub(postcode_pattern, "\\1 \\2", postcode, perl = TRUE)
   } else {
     postcode
   }
@@ -237,6 +241,31 @@ is_district <- function(postcode, ignore_case = FALSE) {
 }
 
 
+#' Is the string the sector part of a postcode.
+#'
+#' @param postcode A character string.
+#' @param ignore_case A boolean.
+#'
+#' @return A boolean.
+#' @export
+#'
+#' @section FIXME:
+#' SE16 is TRUE (should be FALSE) cause it takes it as SE1 6 without space
+#'
+#' @examples
+#' is_sector("EC2A 0")
+#' is_sector("se16 0", ignore_case = TRUE)
+is_sector <- function(postcode, ignore_case = FALSE) {
+  grepl(
+    paste0("^[A-PR-UWYZ]([0-9]{1,2}",             # district (E2 0)
+           "|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)", # district (EC2A 0)
+           "|[0-9][A-HJKPS-UW]) ?[0-9]$"),        # district (SE16 0)
+    postcode,
+    ignore.case = ignore_case
+  )
+}
+
+
 #' Is the string a full postcode.
 #'
 #' @param postcode A character string.
@@ -244,6 +273,10 @@ is_district <- function(postcode, ignore_case = FALSE) {
 #'
 #' @return A boolean.
 #' @export
+#'
+#' @section TODO:
+#' Handle case is_postcode_complete("ng22 9qc", ignore_case = TRUE)
+#' This postcode is not recognized by the regex but is valid(?)
 #'
 #' @examples
 #' is_postcode_complete("EC2A 3JX")

@@ -39,7 +39,7 @@ melt_rows <- function(df, column, dividers = c("\\|"), trim_ws = TRUE){
     when(trim_ws ~ mutate_at(., column, str_trim),
          ~.
     ) %>%
-    #' @FIXME will also filter out pre-existing NA in the column
+    # FIXME will also filter out pre-existing NA in the column
     # filter((!! quo_column) != "") %>%
     distinct()
 }

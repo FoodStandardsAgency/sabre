@@ -15,3 +15,6 @@ A character vector.
 \description{
 Escape characters in string. Make safe for string operations.
 }
+\examples{
+escape_string("(Unit 8) 23 Woodland Road")
+}
