@@ -24,8 +24,6 @@ col_diff <- function(df, left, right, how = "exact") {
   left <- enquo(left)
   right <- enquo(right)
 
-
-
   if (all(how == "exact")) {
     df %>%
       # make special characters safe
