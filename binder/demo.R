@@ -1,8 +1,9 @@
 library(sabre)
+library(dplyr)
 library(Rcpp)
 
-sourceCpp("./dev/gapfill_postcodes.cpp")
-sourceCpp("./dev/parse_nested_records.cpp")
+sourceCpp("./binder/utils/gapfill_postcodes.cpp")
+sourceCpp("./binder/utils/parse_nested_records.cpp")
 
 
 # ------------------------------------------------------------------------------
@@ -74,6 +75,8 @@ melt_rows(
 )
 
 # Chain operations
+# NOTE the order of operations is important and up to the user
+# examples of orders in our cleaning pipelines.
 melt_rows(
   businesses[4:8, 3:4],
   "trading_name",

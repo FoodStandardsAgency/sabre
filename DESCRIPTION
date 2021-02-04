@@ -19,8 +19,7 @@ Imports:
     dplyr (>= 1.0.2),
     magrittr (>= 1.5.0),
     purrr (>= 0.3.0),
-    rlang (>= 0.4.5),
-    Rcpp
+    rlang (>= 0.4.5)
 Suggests:
     covr,
     htmltools,
@@ -34,6 +33,3 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-LinkingTo: 
-    Rcpp
-

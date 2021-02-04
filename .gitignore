@@ -5,6 +5,7 @@ dev/
 .Rproj.user
 .Rhistory
 .RData
+.Renviron
 
 # -- OS --
 __MACOSX
