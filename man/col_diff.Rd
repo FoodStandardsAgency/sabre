@@ -26,8 +26,8 @@ Strip column from strings contained in another column.
 }
 \examples{
 col_diff(businesses[1:8, 2:3],
-         address,
-         postcode,
-         how = c('lowercase', 'squish'))
-
+  address,
+  postcode,
+  how = c("lowercase", "squish")
+)
 }

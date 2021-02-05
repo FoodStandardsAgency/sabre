@@ -13,10 +13,10 @@
 #'
 #' @examples
 #' col_diff(businesses[1:8, 2:3],
-#'          address,
-#'          postcode,
-#'          how = c('lowercase', 'squish'))
-#'
+#'   address,
+#'   postcode,
+#'   how = c("lowercase", "squish")
+#' )
 #' @importFrom dplyr enquo mutate across select
 #' @importFrom stringr str_replace str_squish
 #' @importFrom rlang :=
@@ -28,21 +28,30 @@ col_diff <- function(df, left, right, how = "exact") {
     df %>%
       # make special characters safe
       mutate(right_temp := escape_string(!!right)) %>%
-      mutate(!!left := str_replace(!!left, right_temp, "")) %>%
+      mutate(!!left := ifelse(
+        (right_temp == "") | (is.nan(right_temp)), !!left,
+        str_replace(!!left, right_temp, "")
+      )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(., -right_temp)
   } else if (all(how == "lowercase")) {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
-      mutate(!!left := str_replace(!!left, !!right, "")) %>%
+      mutate(!!left := ifelse(
+        (right_temp == "") | (is.nan(right_temp)), !!left,
+        str_replace(!!left, right_temp, "")
+      )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(., -right_temp)
   } else if (all(how == "squish")) {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%
-      mutate(!!left := str_replace(!!left, !!right, "")) %>%
+      mutate(!!left := ifelse(
+        (right_temp == "") | (is.nan(right_temp)), !!left,
+        str_replace(!!left, right_temp, "")
+      )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(., -right_temp)
   } else if (all(how == c("lowercase", "squish"))) {
@@ -50,7 +59,10 @@ col_diff <- function(df, left, right, how = "exact") {
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%
-      mutate(!!left := str_replace(!!left, !!right, "")) %>%
+      mutate(!!left := ifelse(
+        (right_temp == "") | (is.nan(right_temp)), !!left,
+        str_replace(!!left, right_temp, "")
+      )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(., -right_temp)
   }
