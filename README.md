@@ -8,7 +8,7 @@
 [![R build status](https://github.com/FoodStandardsAgency/sabre/workflows/R-CMD-check/badge.svg)](https://github.com/FoodStandardsAgency/sabre/actions)
 [![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/emersion/stability-badges#unstable)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FoodStandardsAgency/sabre/HEAD?filepath=%2Fbinder%2Fbasics.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FoodStandardsAgency/sabre/HEAD?filepath=%2Fbinder%2Fdemo.ipynb)
 <!-- badges: end -->
 
 Sabre is a toolbox to ease and standardize the cleaning of business and address records.  
@@ -19,8 +19,7 @@ Sabre is a toolbox to ease and standardize the cleaning of business and address 
 ### Github install
 
 ```r
-library(devtools)
-install_github("FoodStandardsAgency/sabre")
+devtools::install_github("FoodStandardsAgency/sabre")
 ```
 
 ### CRAN install
