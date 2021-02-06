@@ -32,10 +32,10 @@
 #' @importFrom rlang sym
 melt_rows <- function(df, column, dividers = c("\\|"), trim_ws = TRUE){
   dividers_ <- str_c(dividers, collapse = "|")
-  quo_column <- sym(column)
+  # quo_column <- sym(column)
 
   df %>%
-    separate_rows(., column, sep = dividers_) %>%
+    separate_rows(column, sep = dividers_) %>%
     when(trim_ws ~ mutate_at(., column, str_trim),
          ~.
     ) %>%

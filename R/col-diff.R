@@ -33,7 +33,8 @@ col_diff <- function(df, left, right, how = "exact") {
         str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
-      select(., -right_temp)
+      select(-right_temp)
+
   } else if (all(how == "lowercase")) {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
@@ -43,7 +44,8 @@ col_diff <- function(df, left, right, how = "exact") {
         str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
-      select(., -right_temp)
+      select(-right_temp)
+
   } else if (all(how == "squish")) {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
@@ -53,7 +55,8 @@ col_diff <- function(df, left, right, how = "exact") {
         str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
-      select(., -right_temp)
+      select(-right_temp)
+
   } else if (all(how == c("lowercase", "squish"))) {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
@@ -64,6 +67,6 @@ col_diff <- function(df, left, right, how = "exact") {
         str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
-      select(., -right_temp)
+      select(-right_temp)
   }
 }
