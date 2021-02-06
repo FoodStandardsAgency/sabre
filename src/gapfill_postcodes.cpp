@@ -1,11 +1,10 @@
-#include <Rcpp.h>
 #include <algorithm>
 #include <regex>
-// #include <iostream>
-// #include <sstream>
-// #include <vector>
+#include <vector>
 #include <string>
-// #include <cstdio>
+
+#include <Rcpp.h>
+#include "str_split.h"
 
 using namespace Rcpp;
 
@@ -125,55 +124,26 @@ bool is_postcode_complete_cpp(std::string s)
 }
 
 // [[Rcpp::export]]
-std::vector<std::string> str_split_cpp(std::string str, std::string token)
-{
-    std::vector<std::string> res;
-
-    while (str.size())
-    {
-        int index = str.find(token);
-
-        // captures from begining up to token
-        if (index != std::string::npos)
-        {
-            std::string substring = str.substr(0, index);
-
-            if (substring.size())
-                // res.push_back(str.substr(0, index)); // up to token
-                res.push_back(substring); // up to token
-
-            str = str.substr(index + token.size()); // token till end of string
-        }
-
-        // end of string, when all tokens have been found
-        else
-        {
-            res.push_back(str);
-            str = "";
-        }
-    }
-
-    // avoid "character(0)" in R which crashes the kernel in this case
-    if (res.empty())
-    {
-        res.push_back("");
-    }
-
-    return res;
-}
-
-// [[Rcpp::export]]
 Rcpp::String last_cpp(std::vector<std::string> v)
 {
     if (!v.empty())
     {
         return v.back();
     }
+    return "";
 }
 
+//' @title gapfill_postcodes
+//' @description
+//' Find postcodes in address vector when missing or incomplete in postcode vector.
+//' @name gapfill_postcodes
+//' @param postcode a vector of strings (same size as address)
+//' @param address a vector of strings (same size as postcode)
+//'
+//' @export
 // [[Rcpp::export]]
-std::vector<std::string> gapfill_postcode_cpp(std::vector<std::string> postcode,
-                                              std::vector<std::string> address)
+std::vector<std::string> gapfill_postcodes(std::vector<std::string> postcode,
+                                           std::vector<std::string> address)
 {
     int n = postcode.size();
 

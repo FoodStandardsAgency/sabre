@@ -1,9 +1,5 @@
 library(sabre)
 library(dplyr)
-library(Rcpp)
-
-sourceCpp("./binder/utils/gapfill_postcodes.cpp")
-sourceCpp("./binder/utils/parse_nested_records.cpp")
 
 
 # ------------------------------------------------------------------------------
@@ -122,7 +118,7 @@ address <-
     "Prof Holmes c/o Enola 25 turmoil road"
   )
 
-gapfill_postcode_cpp(postcode, address)
+gapfill_postcodes(postcode, address)
 
 
 # Deduplicate, squish and change sep for nested records
@@ -143,7 +139,7 @@ businesses %>%
     colnames(businesses), replacements = standardize_replacements
   ) %>%
   mutate(
-    postcode = gapfill_postcode_cpp(postcode, address)
+    postcode = gapfill_postcodes(postcode, address)
   ) %>%
   mutate_at(
     vars(postcode, address),
