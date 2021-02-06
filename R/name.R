@@ -18,7 +18,7 @@
 strip_business_legal_entity_type <- function(string, trim_ws = FALSE, squish_ws = TRUE) {
   pattern <- "(?:^|\\b)(?:Incorporated|[Ll]imited|P\\.C|[Ll][Tt][Dd][Ss]?|[Pp][Ll]{1,2}[Cc]|[Ll]{2}[Pp])\\.?"
   string %>%
-    str_replace_all(., pattern, "") %>%
+    str_replace_all(pattern, "") %>%
     when(trim_ws ~ str_trim(.),
          ~.
     ) %>%
@@ -55,7 +55,7 @@ strip_honorific_title <- function(string, trim_ws = FALSE, squish_ws = TRUE) {
   )
 
   string %>%
-    str_replace_all(., pattern, "") %>%
+    str_replace_all(pattern, "") %>%
     when(
       trim_ws ~ str_trim(.),
       ~.

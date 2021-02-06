@@ -36,7 +36,7 @@ find_postcodes_in_string <- function(string, locale = "GBR") {
   )
 
   string %>%
-    str_extract_all(., postcode_pattern) %>%
+    str_extract_all(postcode_pattern) %>%
     unlist()
 }
 
@@ -96,8 +96,8 @@ find_buildings_numbers <- function(string, locale = "GBR", collapse = "|", unlis
          })
 
   string %>%
-    str_extract_all(., numbers_pattern) %>%
-    lapply(., str_c, collapse = collapse) %>%
+    str_extract_all(numbers_pattern) %>%
+    lapply(str_c, collapse = collapse) %>%
     when(unlist ~ unlist(.),
          ~.
     )
@@ -136,7 +136,7 @@ strip_buildings_numbers_vec <- function(string, locale = "GBR", squish_ws = TRUE
          })
 
   string %>%
-    str_replace_all(., numbers_pattern, "") %>%
+    str_replace_all(numbers_pattern, "") %>%
     when(squish_ws ~ str_squish(.),
          ~.
     )
