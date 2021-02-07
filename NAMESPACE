@@ -2,6 +2,7 @@
 
 export("%>%")
 export(col_diff)
+export(computeGCD)
 export(escape_string)
 export(find_buildings_numbers)
 export(find_postcodes)

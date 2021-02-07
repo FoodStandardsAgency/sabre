@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// computeGCD
+int computeGCD(int a, int b);
+RcppExport SEXP _sabre_computeGCD(SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    Rcpp::traits::input_parameter< int >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(computeGCD(a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
 // to_upper
 Rcpp::String to_upper(std::string str);
 RcppExport SEXP _sabre_to_upper(SEXP strSEXP) {
@@ -98,6 +110,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_sabre_computeGCD", (DL_FUNC) &_sabre_computeGCD, 2},
     {"_sabre_to_upper", (DL_FUNC) &_sabre_to_upper, 1},
     {"_sabre_find_postcodes_in_string_cpp", (DL_FUNC) &_sabre_find_postcodes_in_string_cpp, 1},
     {"_sabre_is_district_cpp", (DL_FUNC) &_sabre_is_district_cpp, 1},
