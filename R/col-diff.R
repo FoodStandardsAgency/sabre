@@ -17,7 +17,7 @@
 #'   postcode,
 #'   how = c("lowercase", "squish")
 #' )
-#' @importFrom dplyr enquo mutate across select
+#' @importFrom dplyr enquo mutate across select case_when
 #' @importFrom stringr str_replace str_squish
 #' @importFrom rlang :=
 col_diff <- function(df, left, right, how = "exact") {
@@ -28,9 +28,10 @@ col_diff <- function(df, left, right, how = "exact") {
     df %>%
       # make special characters safe
       mutate(right_temp := escape_string(!!right)) %>%
-      mutate(!!left := ifelse(
-        (right_temp == "") | (is.nan(right_temp)), !!left,
-        str_replace(!!left, right_temp, "")
+      mutate(!!left := case_when(
+        (right_temp == "") ~ !!left,
+        (is.na(right_temp)) ~ !!left,
+        TRUE ~ str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(-right_temp)
@@ -39,9 +40,10 @@ col_diff <- function(df, left, right, how = "exact") {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
-      mutate(!!left := ifelse(
-        (right_temp == "") | (is.nan(right_temp)), !!left,
-        str_replace(!!left, right_temp, "")
+      mutate(!!left := case_when(
+        (right_temp == "") ~ !!left,
+        (is.na(right_temp)) ~ !!left,
+        TRUE ~ str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(-right_temp)
@@ -50,9 +52,10 @@ col_diff <- function(df, left, right, how = "exact") {
     df %>%
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%
-      mutate(!!left := ifelse(
-        (right_temp == "") | (is.nan(right_temp)), !!left,
-        str_replace(!!left, right_temp, "")
+      mutate(!!left := case_when(
+        (right_temp == "") ~ !!left,
+        (is.na(right_temp)) ~ !!left,
+        TRUE ~ str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(-right_temp)
@@ -62,9 +65,10 @@ col_diff <- function(df, left, right, how = "exact") {
       mutate(right_temp := escape_string(!!right)) %>%
       mutate(across(c(!!left, !!right), ~ tolower(.))) %>%
       mutate(across(c(!!left, !!right), ~ str_squish(.))) %>%
-      mutate(!!left := ifelse(
-        (right_temp == "") | (is.nan(right_temp)), !!left,
-        str_replace(!!left, right_temp, "")
+      mutate(!!left := case_when(
+        (right_temp == "") ~ !!left,
+        (is.na(right_temp)) ~ !!left,
+        TRUE ~ str_replace(!!left, right_temp, "")
       )) %>%
       mutate(!!left := str_squish(!!left)) %>%
       select(-right_temp)
