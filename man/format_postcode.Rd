@@ -7,7 +7,7 @@
 format_postcode(postcode, locale = "GBR")
 }
 \arguments{
-\item{postcode}{A character string.}
+\item{postcode}{A character string or vector of strings.}
 
 \item{locale}{A string, the country code in format ISO 3. Default is "GBR".}
 }

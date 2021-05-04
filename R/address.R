@@ -98,8 +98,9 @@ find_buildings_numbers <- function(string, locale = "GBR", collapse = "|", unlis
   string %>%
     str_extract_all(numbers_pattern) %>%
     lapply(str_c, collapse = collapse) %>%
-    when(unlist ~ unlist(.),
-         ~.
+    when(
+      unlist ~ unlist(.),
+      ~.
     )
 }
 
@@ -137,8 +138,9 @@ strip_buildings_numbers_vec <- function(string, locale = "GBR", squish_ws = TRUE
 
   string %>%
     str_replace_all(numbers_pattern, "") %>%
-    when(squish_ws ~ str_squish(.),
-         ~.
+    when(
+      squish_ws ~ str_squish(.),
+      ~.
     )
 }
 
@@ -191,7 +193,7 @@ strip_buildings_numbers <- function(.data, locale = "GBR", squish_ws = TRUE) {
 #' For GBR postcodes, if it is missing a white space between the outward
 #' (area + district) and inward (sector + unit) codes, then add it.
 #'
-#' @param postcode A character string.
+#' @param postcode A character string or vector of strings.
 #' @param locale A string, the country code in format ISO 3. Default is "GBR".
 #'
 #' @return A character string.
@@ -216,6 +218,13 @@ format_postcode <- function(postcode, locale = "GBR") {
   } else {
     postcode
   }
+
+  case_when(
+    !grepl(" ", postcode, fixed = TRUE) ~ gsub(postcode_pattern, "\\1 \\2", postcode, perl = TRUE),
+    postcode == "NAN" ~ NA_character_,
+    is.na(postcode) ~ NA_character_,
+    TRUE ~ postcode
+  )
 }
 
 
